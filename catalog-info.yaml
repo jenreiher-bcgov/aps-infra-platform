@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "APS Infra Platform"
+  description: "BC Gov API Services"
+  annotations:
+    github.com/project-slug: jenreiher-bcgov/aps-infra-platform
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: documentation
+  lifecycle: experimental
+  owner: "citz"
