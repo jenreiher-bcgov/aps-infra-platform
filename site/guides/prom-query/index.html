@@ -1,0 +1,1539 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="BC Gov API Services">
+      
+      
+      
+      
+        <link rel="prev" href="../owner-journey/">
+      
+      
+        <link rel="next" href="../tutorial-idp-client-cred-flow/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.3">
+    
+    
+      
+        <title>Query Kong Metrics Using Service Account - APS Infra Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#query-kong-metrics-using-service-account" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="APS Infra Platform" class="md-header__button md-logo" aria-label="APS Infra Platform" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APS Infra Platform
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Query Kong Metrics Using Service Account
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jenreiher-bcgov/aps-infra-platform" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="APS Infra Platform" class="md-nav__button md-logo" aria-label="APS Infra Platform" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    APS Infra Platform
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jenreiher-bcgov/aps-infra-platform" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        Glossary
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../personas/" class="md-nav__link">
+        Personas
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../presentations/" class="md-nav__link">
+        Presentations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        Resources
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Gateway
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Gateway
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/AVAILABLE-PLUGINS/" class="md-nav__link">
+        Supported Plugins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/COMMON-CONFIG/" class="md-nav__link">
+        Common Controls
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/SSL/" class="md-nav__link">
+        SSL Termination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+          Plugins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_4">
+          <span class="md-nav__icon md-icon"></span>
+          Plugins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/acl/" class="md-nav__link">
+        Access Control List
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/cors/" class="md-nav__link">
+        Cross-origin Resource Sharing (CORS)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/gwa-ip-anonymity/" class="md-nav__link">
+        GWA IP Anonymity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/jwt-keycloak/" class="md-nav__link">
+        JWT Keycloak
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/key-auth/" class="md-nav__link">
+        Key Auth
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/kong-upstream-auth-basic/" class="md-nav__link">
+        Kong Upstream Auth Basic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/kong-upstream-jwt/" class="md-nav__link">
+        Kong Upstream JWT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/oidc-consumer/" class="md-nav__link">
+        OIDC Consumer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/oidc/" class="md-nav__link">
+        OIDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/proxy-cache/" class="md-nav__link">
+        Proxy Cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/rate-limiting/" class="md-nav__link">
+        Rate Limiting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/request-transformer/" class="md-nav__link">
+        Request Transformer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/waiting-queue/" class="md-nav__link">
+        Waiting Queue
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro-signed-jwt-pubkey/" class="md-nav__link">
+        Signed JWT with Certificate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro-signed-jwt/" class="md-nav__link">
+        Signed JWT with Hosted JWKS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keycloak-rbac/" class="md-nav__link">
+        OIDC and RBAC Protection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../owner-journey/" class="md-nav__link">
+        API Provider User Journey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Query Kong Metrics Using Service Account
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Query Kong Metrics Using Service Account
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    TL;DR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-instructions" class="md-nav__link">
+    Detailed Instructions
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-an-access-token" class="md-nav__link">
+    Getting an Access Token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-queries" class="md-nav__link">
+    Running Queries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-queries" class="md-nav__link">
+    Example Queries
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Queries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-execute-queries" class="md-nav__link">
+    To execute queries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate-per-second-per-routeservice-by-status-code" class="md-nav__link">
+    Rate per Second per route/service by Status Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#req5m-per-routeservice" class="md-nav__link">
+    Req/5m per route/service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-time-per-service" class="md-nav__link">
+    Request time per Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-non-200-requests-per-second-by-route-code" class="md-nav__link">
+    Total Non-200 requests per second by route, code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    Help
+  </a>
+  
+    <nav class="md-nav" aria-label="Help">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-http-api-documentation" class="md-nav__link">
+    Prometheus HTTP API Documentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promql" class="md-nav__link">
+    PromQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafana-and-additional-queries" class="md-nav__link">
+    Grafana and Additional Queries
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial-idp-client-cred-flow/" class="md-nav__link">
+        Protecting an API with OAuth2 Client Credential Flow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          Portal use cases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Portal use cases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/access/" class="md-nav__link">
+        4. Request/Approve Access
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/consumer-maintenance/" class="md-nav__link">
+        5. Consumer Maintenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/create-service-account/" class="md-nav__link">
+        2. Create Service Account
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/login/" class="md-nav__link">
+        1. Login
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/switch-namespace/" class="md-nav__link">
+        3. Switch Namespace
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/websequencediagrams/" class="md-nav__link">
+        Web Sequence Diagrams
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          Releases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Releases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        Releases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2021-jun/" class="md-nav__link">
+        2021-JUN Beta Release
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-aug/" class="md-nav__link">
+        2022-AUG Release 1.2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-may/" class="md-nav__link">
+        2022-MAY Release 1.1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-oct-1.2.5/" class="md-nav__link">
+        2022-OCT Release 1.2.5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-sept-1.2.4/" class="md-nav__link">
+        2022-SEPT Release 1.2.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-sept/" class="md-nav__link">
+        2022-SEPT Release 1.2.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2023-jan-1.2.6/" class="md-nav__link">
+        2023-JAN Release 1.2.6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2023-jun-1.2.12/" class="md-nav__link">
+        2023-JUN Release 1.2.12
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2023-mar-1.2.11/" class="md-nav__link">
+        2023-MAR Release 1.2.11
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    TL;DR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-instructions" class="md-nav__link">
+    Detailed Instructions
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-an-access-token" class="md-nav__link">
+    Getting an Access Token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-queries" class="md-nav__link">
+    Running Queries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-queries" class="md-nav__link">
+    Example Queries
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Queries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-execute-queries" class="md-nav__link">
+    To execute queries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate-per-second-per-routeservice-by-status-code" class="md-nav__link">
+    Rate per Second per route/service by Status Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#req5m-per-routeservice" class="md-nav__link">
+    Req/5m per route/service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-time-per-service" class="md-nav__link">
+    Request time per Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-non-200-requests-per-second-by-route-code" class="md-nav__link">
+    Total Non-200 requests per second by route, code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    Help
+  </a>
+  
+    <nav class="md-nav" aria-label="Help">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-http-api-documentation" class="md-nav__link">
+    Prometheus HTTP API Documentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promql" class="md-nav__link">
+    PromQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafana-and-additional-queries" class="md-nav__link">
+    Grafana and Additional Queries
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/jenreiher-bcgov/aps-infra-platform/edit/main/docs/guides/prom-query.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="query-kong-metrics-using-service-account">Query Kong Metrics Using Service Account<a class="headerlink" href="#query-kong-metrics-using-service-account" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Using a service account generated within your namespace, you can send Prometheus queries to retrieve Kong metrics. Some examples will be provided, but any <a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">PromQL (Prometheus Query Language)</a> query can be sent.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Namespace in the API Gateway</li>
+<li>Service Account associated with the namespace<ul>
+<li>Service Account should have at least <code>Namespace.View</code> permissions</li>
+</ul>
+</li>
+<li>Ideally an active service experiencing some traffic</li>
+</ul>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>Generate an access token with your Service Account. Use the token to send PromQL queries with the following command. Note that queries should be URL encoded.</p>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>curl<span class="w"> </span>-v<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;access-token&gt;&quot;</span><span class="w"> </span><span class="s2">&quot;&lt;prom-query-url&gt;/api/v1/&lt;query&gt;&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="detailed-instructions">Detailed Instructions<a class="headerlink" href="#detailed-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="getting-an-access-token">Getting an Access Token<a class="headerlink" href="#getting-an-access-token" title="Permanent link">&para;</a></h3>
+<p>Using your Service Account credentials, generate an access token:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CID</span><span class="o">=</span>my-client-id
+<span class="nb">export</span><span class="w"> </span><span class="nv">CSC</span><span class="o">=</span>my-client-secret
+<span class="nb">export</span><span class="w"> </span><span class="nv">TOKEN_URL</span><span class="o">=</span>my-token-url
+
+curl<span class="w"> </span><span class="nv">$TOKEN_URL</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/x-www-form-urlencoded&quot;</span><span class="w"> </span><span class="se">\</span>
+-d<span class="w"> </span><span class="nv">client_id</span><span class="o">=</span><span class="nv">$CID</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">client_secret</span><span class="o">=</span><span class="nv">$CSC</span><span class="w"> </span><span class="se">\</span>
+-d<span class="w"> </span><span class="nv">grant_type</span><span class="o">=</span>client_credentials<span class="w"> </span>-d<span class="w"> </span><span class="nv">scopes</span><span class="o">=</span>openid
+</code></pre></div></td></tr></table></div>
+<p>Copy and save the access token:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">TOK</span><span class="o">=</span>my-copied-access-token
+</code></pre></div></td></tr></table></div>
+<h3 id="running-queries">Running Queries<a class="headerlink" href="#running-queries" title="Permanent link">&para;</a></h3>
+<p>Once you have an access token, you can run queries using:</p>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>curl<span class="w"> </span>-v<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$TOK</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;&lt;prom-query-url&gt;/api/v1/&lt;query&gt;&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="example-queries">Example Queries<a class="headerlink" href="#example-queries" title="Permanent link">&para;</a></h2>
+<p>Reminder that if you wish to modify the PromQL queries, it should be URL encoded before sending the request.</p>
+<p>Run the following before running the example queries below:</p>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PQ_URL</span><span class="o">=</span>https://gw-pql.api.gov.bc.ca/api/v1
+<span class="c1"># Can also query dev and test environments. Replace &lt;env&gt; with either dev or test:</span>
+<span class="c1"># export PQ_URL=https://gw-pql-api-gov-bc-ca.&lt;env&gt;.api.gov.bc.ca/api/v1</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="to-execute-queries">To execute queries<a class="headerlink" href="#to-execute-queries" title="Permanent link">&para;</a></h3>
+<p>Run one of the <code>export QUERY=...</code> example blocks, then run one of the <code>Execute ...</code> blocks below to execute that query:</p>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Execute at current server timestamp:</span>
+curl<span class="w"> </span>-v<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$TOK</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PQ_URL</span><span class="s2">/query?query=</span><span class="nv">$QUERY</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Execute at specific time, eg 5 days ago:</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">FIVE_DAYS_AGO</span><span class="o">=</span><span class="k">$(($(</span>date<span class="w"> </span>+<span class="s1">&#39;%s&#39;</span><span class="k">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">(</span><span class="m">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span><span class="k">))</span><span class="o">)</span>
+
+curl<span class="w"> </span>-v<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$TOK</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PQ_URL</span><span class="s2">/query?query=</span><span class="nv">$QUERY</span><span class="s2">&amp;time=</span><span class="nv">$FIVE_DAYS_AGO</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Execute using /query_range:</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">END</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+<span class="s1">&#39;%s&#39;</span><span class="k">)</span><span class="w"> </span><span class="c1"># End of time range. Example uses current UNIX time.</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">START</span><span class="o">=</span><span class="k">$((</span><span class="nv">$END</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">(</span><span class="m">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span><span class="k">))</span><span class="o">)</span><span class="w"> </span><span class="c1"># Start of time range. Example subtracts 5h from END time.</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">STEP</span><span class="o">=</span><span class="m">300</span><span class="w"> </span><span class="c1"># Number of seconds the query steps before evaluating. Eg: evaluate at START + 0s, then START + 300s, etc.</span>
+
+curl<span class="w"> </span>-v<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$TOK</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PQ_URL</span><span class="s2">/query_range?query=</span><span class="nv">$QUERY</span><span class="s2">&amp;start=</span><span class="nv">$START</span><span class="s2">&amp;end=</span><span class="nv">$END</span><span class="s2">&amp;step=</span><span class="nv">$STEP</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="rate-per-second-per-routeservice-by-status-code">Rate per Second per route/service by Status Code<a class="headerlink" href="#rate-per-second-per-routeservice-by-status-code" title="Permanent link">&para;</a></h3>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Raw PromQL Query:</span>
+<span class="c1"># sum(rate(kong_http_status{service=~&quot;.*&quot;, route=~&quot;.*&quot;}[1m])) by (service,code)</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">QUERY</span><span class="o">=</span>sum%28rate%28kong_http_status%7Bservice%3D~%22.%2A%22%2C%20route%3D~%22.%2A%22%7D%5B1m%5D%29%29%20by%20%28service%2Ccode%29
+</code></pre></div></td></tr></table></div>
+<h3 id="req5m-per-routeservice">Req/5m per route/service<a class="headerlink" href="#req5m-per-routeservice" title="Permanent link">&para;</a></h3>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Raw PromQL Query:</span>
+<span class="c1"># sum(increase(kong_http_status{service=~&quot;.*&quot;, route=~&quot;.*&quot;}[5m])) by (service,code) != 0</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">QUERY</span><span class="o">=</span>sum%28increase%28kong_http_status%7Bservice%3D~%22.%2A%22%2C%20route%3D~%22.%2A%22%7D%5B5m%5D%29%29%20by%20%28service%2Ccode%29%20%21%3D%200
+</code></pre></div></td></tr></table></div>
+<h3 id="request-time-per-service">Request time per Service<a class="headerlink" href="#request-time-per-service" title="Permanent link">&para;</a></h3>
+<p><strong>Raw PromQL Query:</strong></p>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Raw PromQL Query:</span>
+<span class="c1"># histogram_quantile(0.95, sum(rate(kong_latency_bucket{type=&quot;request&quot;, service =~ &quot;.*&quot;,route=~&quot;.*&quot;}[1m])) by (service,le))</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">QUANTILE</span><span class="o">=</span><span class="m">0</span>.95
+<span class="nb">export</span><span class="w"> </span><span class="nv">QUERY</span><span class="o">=</span>histogram_quantile%280.95%2C%20sum%28rate%28kong_latency_bucket%7Btype%3D%22request%22%2C%20service%20%3D~%20%22.%2A%22%2Croute%3D~%22.%2A%22%7D%5B1m%5D%29%29%20by%20%28service%2Cle%29%29
+</code></pre></div></td></tr></table></div>
+<h3 id="total-non-200-requests-per-second-by-route-code">Total Non-200 requests per second by route, code<a class="headerlink" href="#total-non-200-requests-per-second-by-route-code" title="Permanent link">&para;</a></h3>
+<div class="language-sh highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Raw PromQL Query:</span>
+<span class="c1"># sum(rate(kong_http_status{code!=&quot;200&quot;,code!=&quot;204&quot;,code!=&quot;201&quot;}[5m])) by (route,code) != 0</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">QUERY</span><span class="o">=</span>sum%28rate%28kong_http_status%7Bcode%21%3D%22200%22%2Ccode%21%3D%22204%22%2Ccode%21%3D%22201%22%7D%5B5m%5D%29%29%20by%20%28route%2Ccode%29%20%21%3D%200
+</code></pre></div></td></tr></table></div>
+<h2 id="help">Help<a class="headerlink" href="#help" title="Permanent link">&para;</a></h2>
+<h3 id="prometheus-http-api-documentation">Prometheus HTTP API Documentation<a class="headerlink" href="#prometheus-http-api-documentation" title="Permanent link">&para;</a></h3>
+<p>View the <a href="https://prometheus.io/docs/prometheus/latest/querying/api/">Prometheus HTTP API Documentation</a> for additional information on sending requests to the Prometheus API.</p>
+<p>Some helpful takeaways:</p>
+<ul>
+<li>Send a GET request to the <code>/metadata</code> endpoint to list all available metrics.<ul>
+<li>You can limit the number of results using the <code>?limit=&lt;number&gt;</code> query string parameter</li>
+<li>Use the <code>?metric=&lt;string&gt;</code> qsp to get information about a specific metric.</li>
+</ul>
+</li>
+<li>Use <code>/labels</code> to get a list of available labels.</li>
+<li>Use <code>/label/&lt;label_value&gt;/values</code> to get possible values for a given <code>label_value</code></li>
+<li>Use <code>/series</code> to get a list of time series that match a given label set. View Prometheus API docs for more info.</li>
+</ul>
+<h3 id="promql">PromQL<a class="headerlink" href="#promql" title="Permanent link">&para;</a></h3>
+<p>Check out the <a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">QUERYING PROMETHEUS</a> documentation for the basics of forming PromQL queries.</p>
+<p>I also felt <a href="https://youtu.be/hvACEDjHQZE">this video</a> was useful for learning PromQL basics.</p>
+<h2 id="grafana-and-additional-queries">Grafana and Additional Queries<a class="headerlink" href="#grafana-and-additional-queries" title="Permanent link">&para;</a></h2>
+<p>We have a number of panels in our Grafana dashboards showcasing a number of queries. Here some examples of on our dashboard, along with the associated PromQL queries:</p>
+<ul>
+<li>Total Requests per second<ul>
+<li>sum(rate(kong_http_status[1m]))</li>
+</ul>
+</li>
+<li>Kong Proxy Latency per Service<ul>
+<li>histogram_quantile(0.90, sum(rate(kong_latency_bucket{type="kong", service =~ ".<em>",route=~".</em>",1m])) by (service,le))</li>
+</ul>
+</li>
+<li>Upstream Time per Service<ul>
+<li>histogram_quantile(0.90, sum(rate(kong_latency_bucket{type="upstream", service =~ ".<em>",route=~".</em>",}[1m])) by (service,le))</li>
+</ul>
+</li>
+<li>Total Requests (5m) by Consumer<ul>
+<li>sum(increase(konglog_service_consumer_counter{service=~".*",consumer!=""}[5m])) by (consumer, service, status) != 0</li>
+</ul>
+</li>
+<li>400 and 500 Errors<ul>
+<li>sum(increase(konglog_service_agent_counter{status!='200',status!='201',status!='204',status!='206',status!='301',status!='302',status!='304',service!=''}[5m])) by (service, status) != 0</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../owner-journey/" class="md-footer__link md-footer__link--prev" aria-label="Previous: API Provider User Journey" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+                API Provider User Journey
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../tutorial-idp-client-cred-flow/" class="md-footer__link md-footer__link--next" aria-label="Next: Protecting an API with OAuth2 Client Credential Flow" rel="next">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+                Protecting an API with OAuth2 Client Credential Flow
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "content.action.edit"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>

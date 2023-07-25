@@ -2,6 +2,7 @@ site_name: "APS Infra Platform"
 site_description: "BC Gov API Services"
 repo_url: https://github.com/jenreiher-bcgov/aps-infra-platform
 edit_uri: edit/main/docs/
+docs_dir: documentation
 
 plugins:
   - techdocs-core

@@ -1,0 +1,2563 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="BC Gov API Services">
+      
+      
+      
+      
+        <link rel="prev" href="../keycloak-rbac/">
+      
+      
+        <link rel="next" href="../prom-query/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.3">
+    
+    
+      
+        <title>API Provider User Journey - APS Infra Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-provider-user-journey" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="APS Infra Platform" class="md-header__button md-logo" aria-label="APS Infra Platform" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APS Infra Platform
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Provider User Journey
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jenreiher-bcgov/aps-infra-platform" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="APS Infra Platform" class="md-nav__button md-logo" aria-label="APS Infra Platform" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    APS Infra Platform
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jenreiher-bcgov/aps-infra-platform" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        Glossary
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../personas/" class="md-nav__link">
+        Personas
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../presentations/" class="md-nav__link">
+        Presentations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        Resources
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Gateway
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Gateway
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/AVAILABLE-PLUGINS/" class="md-nav__link">
+        Supported Plugins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/COMMON-CONFIG/" class="md-nav__link">
+        Common Controls
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/SSL/" class="md-nav__link">
+        SSL Termination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+          Plugins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_4">
+          <span class="md-nav__icon md-icon"></span>
+          Plugins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/acl/" class="md-nav__link">
+        Access Control List
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/cors/" class="md-nav__link">
+        Cross-origin Resource Sharing (CORS)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/gwa-ip-anonymity/" class="md-nav__link">
+        GWA IP Anonymity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/jwt-keycloak/" class="md-nav__link">
+        JWT Keycloak
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/key-auth/" class="md-nav__link">
+        Key Auth
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/kong-upstream-auth-basic/" class="md-nav__link">
+        Kong Upstream Auth Basic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/kong-upstream-jwt/" class="md-nav__link">
+        Kong Upstream JWT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/oidc-consumer/" class="md-nav__link">
+        OIDC Consumer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/oidc/" class="md-nav__link">
+        OIDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/proxy-cache/" class="md-nav__link">
+        Proxy Cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/rate-limiting/" class="md-nav__link">
+        Rate Limiting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/request-transformer/" class="md-nav__link">
+        Request Transformer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway/plugins/waiting-queue/" class="md-nav__link">
+        Waiting Queue
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro-signed-jwt-pubkey/" class="md-nav__link">
+        Signed JWT with Certificate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro-signed-jwt/" class="md-nav__link">
+        Signed JWT with Hosted JWKS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keycloak-rbac/" class="md-nav__link">
+        OIDC and RBAC Protection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          API Provider User Journey
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        API Provider User Journey
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-register-a-new-namespace" class="md-nav__link">
+    1. Register a New Namespace
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-generate-a-service-account" class="md-nav__link">
+    2. Generate a Service Account
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-prepare-configuration" class="md-nav__link">
+    3. Prepare Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Prepare Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ocp-network-policies" class="md-nav__link">
+    OCP Network Policies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#private-routing" class="md-nav__link">
+    Private Routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upstream-mtls" class="md-nav__link">
+    Upstream mTLS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-an-openapi-spec" class="md-nav__link">
+    Using an OpenAPI Spec
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-apply-gateway-configuration" class="md-nav__link">
+    4. Apply Gateway Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Apply Gateway Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-gwa-command-line-recommended" class="md-nav__link">
+    4.1. gwa Command Line (recommended)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-swagger-console-optional" class="md-nav__link">
+    4.2. Swagger Console (optional)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-postman-optional" class="md-nav__link">
+    4.3. Postman (optional)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-helm-chart" class="md-nav__link">
+    4.4. Helm Chart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verify-routes" class="md-nav__link">
+    5. Verify Routes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-view-metrics" class="md-nav__link">
+    6. View Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-grant-access-to-other-users" class="md-nav__link">
+    7. Grant Access to Other Users
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-add-to-your-cicd-pipeline" class="md-nav__link">
+    8. Add to your CI/CD Pipeline
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Add to your CI/CD Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-github-actions-example" class="md-nav__link">
+    8.1. Github Actions Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-helm-chart" class="md-nav__link">
+    8.2. Helm Chart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-share-your-api-for-discovery" class="md-nav__link">
+    9. Share your API for Discovery
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Share your API for Discovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-setup-your-draft-dataset" class="md-nav__link">
+    9.1 Setup your Draft Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-setup-your-product" class="md-nav__link">
+    9.2 Setup your Product
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-update-gateway-configuration" class="md-nav__link">
+    9.3 Update Gateway Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-check-access" class="md-nav__link">
+    9.4 Check Access
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-get-an-api-key" class="md-nav__link">
+    9.5 Get an API Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96-manage-access" class="md-nav__link">
+    9.6 Manage Access
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#97-enabling-for-discovery" class="md-nav__link">
+    9.7 Enabling for Discovery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#98-view-your-product-in-the-api-directory" class="md-nav__link">
+    9.8 View Your Product in the API Directory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-what-to-try-next" class="md-nav__link">
+    10 What to try next?
+  </a>
+  
+    <nav class="md-nav" aria-label="10 What to try next?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-connect-with-the-bc-government-api-community" class="md-nav__link">
+    10.1 Connect with the BC Government API Community
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-read-our-other-guides" class="md-nav__link">
+    10.2 Read Our Other Guides
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-protect-your-api-using-an-external-identity-provider" class="md-nav__link">
+    10.3 Protect Your API using an External Identity Provider
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-use-the-access-approval-process" class="md-nav__link">
+    10.4 Use the Access Approval Process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105-publish-your-documentation-on-the-portal" class="md-nav__link">
+    10.5 Publish Your Documentation on the Portal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-links" class="md-nav__link">
+    Production Links
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prom-query/" class="md-nav__link">
+        Query Kong Metrics Using Service Account
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial-idp-client-cred-flow/" class="md-nav__link">
+        Protecting an API with OAuth2 Client Credential Flow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          Portal use cases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Portal use cases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/access/" class="md-nav__link">
+        4. Request/Approve Access
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/consumer-maintenance/" class="md-nav__link">
+        5. Consumer Maintenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/create-service-account/" class="md-nav__link">
+        2. Create Service Account
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/login/" class="md-nav__link">
+        1. Login
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/switch-namespace/" class="md-nav__link">
+        3. Switch Namespace
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portal-use-cases/websequencediagrams/" class="md-nav__link">
+        Web Sequence Diagrams
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          Releases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Releases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        Releases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2021-jun/" class="md-nav__link">
+        2021-JUN Beta Release
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-aug/" class="md-nav__link">
+        2022-AUG Release 1.2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-may/" class="md-nav__link">
+        2022-MAY Release 1.1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-oct-1.2.5/" class="md-nav__link">
+        2022-OCT Release 1.2.5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-sept-1.2.4/" class="md-nav__link">
+        2022-SEPT Release 1.2.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2022-sept/" class="md-nav__link">
+        2022-SEPT Release 1.2.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2023-jan-1.2.6/" class="md-nav__link">
+        2023-JAN Release 1.2.6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2023-jun-1.2.12/" class="md-nav__link">
+        2023-JUN Release 1.2.12
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/2023-mar-1.2.11/" class="md-nav__link">
+        2023-MAR Release 1.2.11
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-register-a-new-namespace" class="md-nav__link">
+    1. Register a New Namespace
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-generate-a-service-account" class="md-nav__link">
+    2. Generate a Service Account
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-prepare-configuration" class="md-nav__link">
+    3. Prepare Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Prepare Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ocp-network-policies" class="md-nav__link">
+    OCP Network Policies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#private-routing" class="md-nav__link">
+    Private Routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upstream-mtls" class="md-nav__link">
+    Upstream mTLS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-an-openapi-spec" class="md-nav__link">
+    Using an OpenAPI Spec
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-apply-gateway-configuration" class="md-nav__link">
+    4. Apply Gateway Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Apply Gateway Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-gwa-command-line-recommended" class="md-nav__link">
+    4.1. gwa Command Line (recommended)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-swagger-console-optional" class="md-nav__link">
+    4.2. Swagger Console (optional)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-postman-optional" class="md-nav__link">
+    4.3. Postman (optional)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-helm-chart" class="md-nav__link">
+    4.4. Helm Chart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verify-routes" class="md-nav__link">
+    5. Verify Routes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-view-metrics" class="md-nav__link">
+    6. View Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-grant-access-to-other-users" class="md-nav__link">
+    7. Grant Access to Other Users
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-add-to-your-cicd-pipeline" class="md-nav__link">
+    8. Add to your CI/CD Pipeline
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Add to your CI/CD Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-github-actions-example" class="md-nav__link">
+    8.1. Github Actions Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-helm-chart" class="md-nav__link">
+    8.2. Helm Chart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-share-your-api-for-discovery" class="md-nav__link">
+    9. Share your API for Discovery
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Share your API for Discovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-setup-your-draft-dataset" class="md-nav__link">
+    9.1 Setup your Draft Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-setup-your-product" class="md-nav__link">
+    9.2 Setup your Product
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-update-gateway-configuration" class="md-nav__link">
+    9.3 Update Gateway Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-check-access" class="md-nav__link">
+    9.4 Check Access
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-get-an-api-key" class="md-nav__link">
+    9.5 Get an API Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96-manage-access" class="md-nav__link">
+    9.6 Manage Access
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#97-enabling-for-discovery" class="md-nav__link">
+    9.7 Enabling for Discovery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#98-view-your-product-in-the-api-directory" class="md-nav__link">
+    9.8 View Your Product in the API Directory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-what-to-try-next" class="md-nav__link">
+    10 What to try next?
+  </a>
+  
+    <nav class="md-nav" aria-label="10 What to try next?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-connect-with-the-bc-government-api-community" class="md-nav__link">
+    10.1 Connect with the BC Government API Community
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-read-our-other-guides" class="md-nav__link">
+    10.2 Read Our Other Guides
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-protect-your-api-using-an-external-identity-provider" class="md-nav__link">
+    10.3 Protect Your API using an External Identity Provider
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-use-the-access-approval-process" class="md-nav__link">
+    10.4 Use the Access Approval Process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105-publish-your-documentation-on-the-portal" class="md-nav__link">
+    10.5 Publish Your Documentation on the Portal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-links" class="md-nav__link">
+    Production Links
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/jenreiher-bcgov/aps-infra-platform/edit/main/docs/guides/owner-journey.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="api-provider-user-journey">API Provider User Journey<a class="headerlink" href="#api-provider-user-journey" title="Permanent link">&para;</a></h1>
+<p>The following steps guide an API Provider through setting up an API on the BC Government API Gateway in a Test/Training instance. If you are ready to deploy to the Production instance, use the links available at the end of this document (<a href="#production-links">here</a>).</p>
+<h2 id="1-register-a-new-namespace">1. Register a New Namespace<a class="headerlink" href="#1-register-a-new-namespace" title="Permanent link">&para;</a></h2>
+<p>A <code>namespace</code> represents a collection of Kong Gateway Services and Routes that are managed independently.</p>
+<p>Create a new namespace:</p>
+<ol>
+<li>
+<p>Log in to the <a href="https://api-gov-bc-ca.test.api.gov.bc.ca">API Services Portal</a> as an <code>API Provider</code> using your IDIR.</p>
+</li>
+<li>
+<p>Click the namespace drop-down menu (top right next to your user name - it may show <code>No Active Namespace</code>).</p>
+</li>
+<li>
+<p>Click <code>Create New Namespace</code>.</p>
+</li>
+<li>
+<p>Enter the Namespace name.</p>
+</li>
+<li>
+<p>Click Create.</p>
+</li>
+</ol>
+<blockquote>
+<p>NOTE: The name must be a lowercase alphanumeric string between 5 and 15 characters (RegExp reference: <code>^[a-z][a-z0-9-]{4,14}$</code>).</p>
+</blockquote>
+<p>You can manage namespaces by clicking the namespace drop-down menu and selecting the required namespace.</p>
+<h2 id="2-generate-a-service-account">2. Generate a Service Account<a class="headerlink" href="#2-generate-a-service-account" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Go to the <code>Namespaces</code> tab.</p>
+</li>
+<li>
+<p>Click <code>Service Accounts</code>, then Cick <code>New Service Account</code>.</p>
+</li>
+<li>
+<p>Select the <code>GatewayConfig.Publish</code> permission for the Service Account and click <code>Share</code>. A new credential will be created - make a note of the <code>ID</code> and <code>Secret</code>.</p>
+</li>
+</ol>
+<blockquote>
+<p>NOTE: Make sure to save the generated Client ID and Secret.</p>
+</blockquote>
+<p>The following list describes the permissions:</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Permission</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Namespace.Manage</code></td>
+<td>Permission to update the Access Control List for controlling access to viewing metrics, service configuration and service account management (effectively a superuser for the namespace)</td>
+</tr>
+<tr>
+<td><code>Namespace.View</code></td>
+<td>Read-only access to the namespace</td>
+</tr>
+<tr>
+<td><code>GatewayConfig.Publish</code></td>
+<td>Permission to publish gateway configuration to Kong and view the status of the upstreams</td>
+</tr>
+<tr>
+<td><code>Content.Publish</code></td>
+<td>Permission to update the documentation on the portal</td>
+</tr>
+<tr>
+<td><code>CredentialIssuer.Admin</code></td>
+<td>Permission to create Authorization Profiles for integrating with third-party Identity Providers; yhe profiles are available to be used when configuring Product Environments</td>
+</tr>
+<tr>
+<td><code>Access.Manage</code></td>
+<td>Permission to approve/reject access requests to your APIs</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-prepare-configuration">3. Prepare Configuration<a class="headerlink" href="#3-prepare-configuration" title="Permanent link">&para;</a></h2>
+<p>The gateway configuration can be hand-crafted or you can use a command line interface that APS developed called <code>gwa</code> to convert your OpenAPI v3 spec to a Kong configuration.</p>
+<p><strong>Run the following commands to create a basic configuration of a single service and route:</strong></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">NS</span><span class="o">=</span><span class="s2">&quot;&lt;YOUR NAMESPACE&gt;&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;a-service-for-</span><span class="nv">$NS</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">services:</span>
+<span class="s2">- name: </span><span class="nv">$NAME</span>
+<span class="s2">  host: httpbin.org</span>
+<span class="s2">  tags: [ ns.</span><span class="nv">$NS</span><span class="s2"> ]</span>
+<span class="s2">  port: 443</span>
+<span class="s2">  protocol: https</span>
+<span class="s2">  retries: 0</span>
+<span class="s2">  routes:</span>
+<span class="s2">  - name: </span><span class="nv">$NAME</span><span class="s2">-route</span>
+<span class="s2">    tags: [ ns.</span><span class="nv">$NS</span><span class="s2"> ]</span>
+<span class="s2">    hosts:</span>
+<span class="s2">    - </span><span class="nv">$NAME</span><span class="s2">.api.gov.bc.ca</span>
+<span class="s2">    paths:</span>
+<span class="s2">    - /</span>
+<span class="s2">    methods:</span>
+<span class="s2">    - GET</span>
+<span class="s2">    strip_path: false</span>
+<span class="s2">    https_redirect_status_code: 426</span>
+<span class="s2">    path_handling: v0</span>
+<span class="s2">    request_buffering: true</span>
+<span class="s2">    response_buffering: true</span>
+<span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>gwconfig.yaml
+</code></pre></div></td></tr></table></div>
+<p>Review the <code>gwconfig.yaml</code> file to see what it is doing. There is a single upstream service defined to be <code>httpbin.org</code>, and a single route <code>$NAME.api.gov.bc.ca</code> that passes all <code>GET</code> requests to the upstream service.</p>
+<blockquote>
+<p>To view common plugin configuration go to <a href="../gateway-plugins/COMMON-CONFIG.md">Common Controls</a></p>
+<p>To learn about other available plugins, navigate to <code>Gateway &gt; Plugins</code> on the sidebar of this page.</p>
+<p><strong>Declarative Config:</strong> DecK is used to sync your configuration with Kong; see <a href="https://docs.konghq.com/deck/overview/">https://docs.konghq.com/deck/overview/</a> for more information.</p>
+<p><strong>Splitting Your Config:</strong> A namespace <code>tag</code> with the format <code>ns.$NS</code> is mandatory for each service/route/plugin. But, if you have separate pipelines for your environments (i.e., dev, test and prod), you can split your configuration and update the <code>tags</code> with the qualifier. For example, you can use a tag <code>ns.$NS.dev</code> to sync the Kong configuration for <code>dev</code> Service and Routes only.</p>
+</blockquote>
+<h3 id="ocp-network-policies">OCP Network Policies<a class="headerlink" href="#ocp-network-policies" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>If your service is running on the Openshift platform, you should specify the Kubernetes Service in the <code>Service.host</code>. It must have the format: <code>&lt;name&gt;.&lt;ocp-namespace&gt;.svc</code>. Also, make sure your <code>Service.port</code> matches your Kubernetes Service Port. Any Security Policies for egress from the Gateway will be setup automatically on the API Gateway side.</p>
+</blockquote>
+<p>The Kong Gateway runs Data Planes in both Silver and Gold clusters.</p>
+<p><strong>Silver Cluster</strong></p>
+<p>You will need to create a Network Policy on your side similar to the following to allow the Gateway's test and prod environments to route traffic to your API:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">allow-traffic-from-gateway-to-your-api</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-upstream-api</span>
+<span class="w">  </span><span class="nt">ingress</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">namespaceSelector</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">264e6f</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">namespaceSelector</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">264e6f</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>Gold Cluster</strong></p>
+<p>If your service is running on Gold, you will need to contact the APS team so that we can properly provision the <code>namespace</code> on the correct Kong Data Plane and ensure the correct DNS is setup for your routes. The following is the Network Policy on Gold.</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">allow-traffic-from-gateway-to-your-api</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-upstream-api</span>
+<span class="w">  </span><span class="nt">ingress</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">namespaceSelector</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">b8840c</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">namespaceSelector</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">b8840c</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="private-routing">Private Routing<a class="headerlink" href="#private-routing" title="Permanent link">&para;</a></h3>
+<p>By default, publically available endpoints are created based on Kong Routes where the hosts must end with <code>*.api.gov.bc.ca</code> or <code>*.apps.gov.bc.ca</code>.</p>
+<p>There are use cases where the clients that are consuming the API are on the same Openshift platform that the API is deployed to. In this case, there is a security benefit of not making the API endpoints publically available.</p>
+<p>To support this, the route <code>hosts</code> can be updated with a host that follows the format: <code>&lt;api-name&gt;.cluster.local</code>. When the configuration is published to Kong, an Openshift Service is created with a corresponding Service Serving Certificate (SSC), which is routeable from within the Openshift cluster.</p>
+<p>An example Gateway configuration for an upstream API deployed in the Silver cluster would be:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">httpbin.org</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ns.$NS</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
+<span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
+<span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">    </span><span class="nt">routes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service-route</span>
+<span class="w">        </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ns.$NS</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service.cluster.local</span>
+</code></pre></div></td></tr></table></div>
+<p>A new endpoint is then created in our Silver Test environment as: <a href="https://gw-my-service.264e6f-test.svc.cluster.local">https://gw-my-service.264e6f-test.svc.cluster.local</a> (if it was configured in our Prod environment, it would be: <a href="https://gw-my-service.264e6f-prod.svc.cluster.local">https://gw-my-service.264e6f-prod.svc.cluster.local</a>)</p>
+<p>To verify that the endpoint is callable, you can deploy a simple pod that mounts the <code>service-ca</code> to be used for verifying the SSC.</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmp-ca</span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">service.beta.openshift.io/inject-cabundle</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmp-deployment</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sleeper</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sleeper</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sleeper</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config</span>
+<span class="w">          </span><span class="nt">configMap</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmp-ca</span>
+
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">idle</span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.io/curlimages/curl:latest</span>
+<span class="w">          </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;sh&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-c</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">              </span><span class="no">sleep Infinite</span>
+<span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config</span>
+<span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/config&quot;</span>
+<span class="w">              </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div></td></tr></table></div>
+<p>From the Pod's Terminal, you can then run:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>curl<span class="w"> </span>-v<span class="w"> </span>--cacert<span class="w"> </span>/config/service-ca.crt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://gw-my-service.264e6f-prod.svc.cluster.local/uuid
+</code></pre></div></td></tr></table></div>
+<p>You should see a 200 response with a valid UUID.</p>
+<h3 id="upstream-mtls">Upstream mTLS<a class="headerlink" href="#upstream-mtls" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Require mTLS between the Gateway and your Upstream Service?</strong> To support mTLS on your Upstream Service, you will need to provide client certificate details and if you want to verify the upstream endpoint then the <code>ca_certificates</code> and <code>tls_verify</code> is required as well. Example:</p>
+</blockquote>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-upstream-service</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-upstream.site</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">_NS_</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
+<span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
+<span class="w">    </span><span class="nt">tls_verify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">ca_certificates</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0a780ee0-626c-11eb-ae93-0242ac130012</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">client_certificate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8fc131ef-9752-43a4-ba70-eb10ba442d4e</span>
+<span class="w">    </span><span class="nt">routes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+<span class="nt">certificates</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cert</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;PEM</span><span class="nv"> </span><span class="s">FORMAT&gt;&quot;</span>
+<span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;PEM</span><span class="nv"> </span><span class="s">FORMAT&gt;&quot;</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">_NS_</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8fc131ef-9752-43a4-ba70-eb10ba442d4e</span>
+<span class="nt">ca_certificates</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cert</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;PEM</span><span class="nv"> </span><span class="s">FORMAT&gt;&quot;</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">_NS_</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0a780ee0-626c-11eb-ae93-0242ac130012</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>NOTE: You must generate a UUID (<code>python -c 'import uuid; print(uuid.uuid4())'</code>) for each certificate and ca_certificate you create (set the <code>id</code>) and reference it in your <code>services</code> details.</p>
+<p>HELPER: Python command to get a PEM file on one line: <code>python -c 'import sys; import json; print(json.dumps(open(sys.argv[1]).read()))' my.pem</code></p>
+</blockquote>
+<h3 id="using-an-openapi-spec">Using an OpenAPI Spec<a class="headerlink" href="#using-an-openapi-spec" title="Permanent link">&para;</a></h3>
+<p>Run: <code>./gwa new</code> and follow the prompts.</p>
+<p>Example:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>./gwa<span class="w"> </span>new<span class="w"> </span>-o<span class="w"> </span>gwconfig.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--route-host<span class="w"> </span>myapi.api.gov.bc.ca<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--service-url<span class="w"> </span>https://httpbin.org<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://bcgov.github.io/gwa-api/openapi/simple.yaml
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>See below for the <code>gwa</code> CLI install instructions.</p>
+</blockquote>
+<h2 id="4-apply-gateway-configuration">4. Apply Gateway Configuration<a class="headerlink" href="#4-apply-gateway-configuration" title="Permanent link">&para;</a></h2>
+<p>The Swagger console for the <code>gwa-api</code> can be used to publish the Kong Gateway configuration, or you can use the <code>gwa Command Line</code>.</p>
+<h3 id="41-gwa-command-line-recommended">4.1. gwa Command Line (recommended)<a class="headerlink" href="#41-gwa-command-line-recommended" title="Permanent link">&para;</a></h3>
+<p><strong>Install (for Linux)</strong></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">GWA_CLI_VERSION</span><span class="o">=</span>v1.3.1<span class="p">;</span><span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>-O<span class="w"> </span>https://github.com/bcgov/gwa-cli/releases/download/<span class="si">${</span><span class="nv">GWA_CLI_VERSION</span><span class="si">}</span>/gwa_<span class="si">${</span><span class="nv">GWA_CLI_VERSION</span><span class="si">}</span>_linux_x64.zip
+unzip<span class="w"> </span>gwa_<span class="si">${</span><span class="nv">GWA_CLI_VERSION</span><span class="si">}</span>_linux_x64.zip
+./gwa<span class="w"> </span>--version
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>Using MacOS or Windows?</strong> Download here: <a href="https://github.com/bcgov/gwa-cli/releases/tag/v1.3.1">https://github.com/bcgov/gwa-cli/releases/tag/v1.3.1</a></p>
+<p>NOTE: As of version 1.2+ there is support for v2 of the APS API. To continue using v1 of the API, ensure that the API Version is set to 1.</p>
+</blockquote>
+<p><strong>Configure</strong></p>
+<p>Run the following to configure a <code>.env</code> file that will hold all the env vars for running <code>gwa</code>:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>./gwa init -T --api-version=2 --namespace=&lt;YOUR NAMESPACE&gt; \
+  --client-id=&lt;YOUR SERVICE ACCOUNT ID&gt; \
+  --client-secret=&lt;YOUR SERVICE ACCOUNT SECRET&gt;`
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>NOTE: Use the Client ID and Secret obtained from step 2.</p>
+<p>NOTE: The <code>-T</code> indicates the APS Test environment. For production use <code>-P</code>.</p>
+</blockquote>
+<p>Run <code>./gwa status</code> to confirm that access to the Gateway is working.</p>
+<p><strong>Publish</strong></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./gwa<span class="w"> </span>pg<span class="w"> </span>gwconfig.yaml
+</code></pre></div></td></tr></table></div>
+<p>If you want to see the expected changes, but not actually apply them, you can run:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./gwa<span class="w"> </span>pg<span class="w"> </span>--dry-run<span class="w"> </span>gwconfig.yaml
+</code></pre></div></td></tr></table></div>
+<h3 id="42-swagger-console-optional">4.2. Swagger Console (optional)<a class="headerlink" href="#42-swagger-console-optional" title="Permanent link">&para;</a></h3>
+<p>Go to <a href="https://openapi.apps.gov.bc.ca?url=https://gwa-api-gov-bc-ca.test.api.gov.bc.ca/docs/v2/openapi.yaml">gwa-api Swagger Console</a>.</p>
+<p>Select the <code>PUT</code> <code>/namespaces/{namespace}/gateway</code> API.</p>
+<p>The Service Account uses the OAuth2 Client Credentials Grant Flow. Click the <code>lock</code> link (on the right) and enter the Service Account credentials generated in Section 2.</p>
+<p>For the <code>Parameter namespace</code>, enter the namespace you created in Section 1.</p>
+<p>Set <code>dryRun</code> to <code>true</code>.</p>
+<p>Select a <code>configFile</code> file.</p>
+<p>Send the request.</p>
+<h3 id="43-postman-optional">4.3. Postman (optional)<a class="headerlink" href="#43-postman-optional" title="Permanent link">&para;</a></h3>
+<p>From the Postman App, click <code>Import</code> and go to the <code>Link</code> tab.</p>
+<p>Enter the URL: <a href="https://openapi-to-postman.api.gov.bc.ca/?u=https://gwa-api-gov-bc-ca.test.api.gov.bc.ca/docs/v2/openapi.yaml">https://openapi-to-postman.api.gov.bc.ca/?u=https://gwa-api-gov-bc-ca.test.api.gov.bc.ca/docs/v2/openapi.yaml</a></p>
+<p>After creation, go to <code>Collections</code> and right-click on the <code>Gateway Administration (GWA) API</code> collection and select <code>edit</code>.</p>
+<p>Go to the <code>Authorization</code> tab, enter your <code>Client ID</code> and <code>Client Secret</code>, and click <code>Get New Access Token</code>.</p>
+<p>You should get a successful dialog to proceed. Click <code>Proceed</code> and <code>Use Token</code>.</p>
+<p>You can verify that the token works by going to the Collection <code>Return key information about authenticated identity</code> and clicking <code>Send</code>.</p>
+<h3 id="44-helm-chart">4.4. Helm Chart<a class="headerlink" href="#44-helm-chart" title="Permanent link">&para;</a></h3>
+<p>There is a helm chart available that provisions resources on the API Gateway, API Services Portal and OCP (Network Policy).</p>
+<p>The helm chart is located at: <a href="https://github.com/bcgov/helm-charts/tree/master/charts/aps-gateway-ns">https://github.com/bcgov/helm-charts/tree/master/charts/aps-gateway-ns</a></p>
+<p>The chart creates Jobs to provision the resources, and it expects secrets to be setup in the common Hashicorp Vault <a href="https://vault.developer.gov.bc.ca">https://vault.developer.gov.bc.ca</a> instance.</p>
+<p>Prepare a <code>config.yaml</code> file:</p>
+<ul>
+<li>update the security context for the particular OCP project</li>
+<li>the license plate <code>af9xxx</code> can be replaced with your own OCP license plate</li>
+<li>the secret <code>example-dev</code> should be the name of the secret that has the following keys defined (information from a APS Portal namespace Service Account):<ul>
+<li>GWA_ACCT_ID</li>
+<li>GWA_ACCT_SECRET</li>
+<li>NAMESPACE</li>
+<li>TOKEN_URL</li>
+<li>GWA_INIT_FLAG : Set to either <code>-T</code> or <code>-P</code> representing the API Gateway environment</li>
+</ul>
+</li>
+<li>update the Pod matching <code>networkPolicy.matchLabels</code> for the Network Policy for Ingress traffic from the API Gateway</li>
+</ul>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">podSecurityContext</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">fsGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1013540000</span>
+
+<span class="nt">securityContext</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">runAsUser</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1013540000</span>
+
+<span class="nt">serviceAccount</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">create</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">af9xxx-vault</span>
+
+<span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">authPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auth/k8s-silver</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">platform-services</span>
+<span class="w">  </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxxx-nonprod</span>
+<span class="w">  </span><span class="nt">secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxxx-nonprod/aps-gateway-creds</span>
+
+<span class="nt">networkPolicy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">create</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">namespaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">xxxxxx-dev</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">xxxxxx-test</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">xxxxxx-prod</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-api</span>
+
+<span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+
+<span class="nt">directoryConfig</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">products</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="nt">issuers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="nt">datasets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</code></pre></div></td></tr></table></div>
+<p>The yaml created earlier for the API Gateway (<code>gwconfig.yaml</code>) can be used as part of the helm configuration.</p>
+<p>Run Helm to install the Jobs:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>helm repo add bcgov https://bcgov.github.io/helm-charts
+helm upgrade --install example -f config.yaml -f gwconfig.yaml bcgov/aps-gateway-ns
+</code></pre></div></td></tr></table></div>
+<h2 id="5-verify-routes">5. Verify Routes<a class="headerlink" href="#5-verify-routes" title="Permanent link">&para;</a></h2>
+<p>To verify that the Gateway can access the upstream services, run the command: <code>./gwa status</code>.</p>
+<p>In the APS <code>test</code> environment, the hosts that you defined in the routes are altered. To see the actual hosts, log into the <a href="https://api-gov-bc-ca.test.api.gov.bc.ca">API Services Portal</a>, go to the <code>Namespaces</code> tab, go to <code>Gateway Services</code>, and select your particular service to get the routing details.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>curl<span class="w"> </span>https://<span class="si">${</span><span class="nv">NAME</span><span class="si">}</span>-api-gov-bc-ca.test.api.gov.bc.ca/headers
+
+ab<span class="w"> </span>-n<span class="w"> </span><span class="m">20</span><span class="w"> </span>-c<span class="w"> </span><span class="m">2</span><span class="w"> </span>https://<span class="si">${</span><span class="nv">NAME</span><span class="si">}</span>-api-gov-bc-ca.test.api.gov.bc.ca/headers
+</code></pre></div></td></tr></table></div>
+<h2 id="6-view-metrics">6. View Metrics<a class="headerlink" href="#6-view-metrics" title="Permanent link">&para;</a></h2>
+<p>You can view the following metrics in real-time for the Services that you configure on the Gateway:</p>
+<ul>
+<li><strong>Request Rate</strong>: Requests / Second (by Service/Route, by HTTP Status)</li>
+<li><strong>Latency</strong>: Standard deviations measured for latency inside Kong and on the Upstream Service (by Service/Route)</li>
+<li><strong>Bandwidth</strong>: Ingress/egress bandwidth (by Service/Route)</li>
+<li><strong>Total Requests</strong>: In 5 minute windows (by Consumer, by User Agent, by Service, by HTTP Status)</li>
+</ul>
+<p>All metrics can be viewed by an arbitrary time window; default is <code>Last 24 Hours</code>.</p>
+<p>Go to <a href="https://grafana-apps-gov-bc-ca.test.api.gov.bc.ca">Grafana</a> to view metrics for your configured services.</p>
+<p>You can also access summarized metrics from the <code>API Services Portal</code> by going to the <code>Namespaces</code> tab and clicking the <code>Gateway Services</code> link.</p>
+<blockquote>
+<p>NOTE: A shortcut to Grafana is provided from the <code>Gateway Services</code> page by clicking <code>View metrics in real-time</code>.</p>
+</blockquote>
+<h2 id="7-grant-access-to-other-users">7. Grant Access to Other Users<a class="headerlink" href="#7-grant-access-to-other-users" title="Permanent link">&para;</a></h2>
+<p>To grant access to other users, you need to grant them the appropriate Scopes. You can do this from the <code>API Services Portal</code> by selecting the relevant <code>Namespace</code> and going to the Namespaces <code>Namespace Access</code> page. From there, you can grant users access to the Namespace.</p>
+<h2 id="8-add-to-your-cicd-pipeline">8. Add to your CI/CD Pipeline<a class="headerlink" href="#8-add-to-your-cicd-pipeline" title="Permanent link">&para;</a></h2>
+<p>Update your CI/CD pipelines to run the <code>gwa-cli</code> to keep your services updated on the gateway.</p>
+<h3 id="81-github-actions-example">8.1. Github Actions Example<a class="headerlink" href="#81-github-actions-example" title="Permanent link">&para;</a></h3>
+<p>In the repository where you maintain your CI/CD Pipeline configuration, use the Service Account details from <code>Section 2</code> to set up two <code>Secrets</code>:</p>
+<ul>
+<li>GWA_ACCT_ID</li>
+</ul>
+<ul>
+<li>GWA_ACCT_SECRET</li>
+</ul>
+<p>Add a <code>.gwa</code> folder (can be called anything) that will be used to hold your gateway configuration.</p>
+<p>Github Workflow example:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">env</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">NS</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;your</span><span class="nv"> </span><span class="s">namespace&gt;&quot;</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v1</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">          </span><span class="nt">TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get GWA Command Line</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">curl -L -O https://github.com/bcgov/gwa-cli/releases/download/v1.3.1/gwa_v1.3.1_linux_x64.zip</span>
+<span class="w">          </span><span class="no">unzip gwa_v1.3.1_linux_x64.zip</span>
+<span class="w">          </span><span class="no">export PATH=`pwd`:$PATH</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Apply Namespace Configuration</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">export PATH=`pwd`:$PATH</span>
+<span class="w">          </span><span class="no">cd .gwa/$NS</span>
+
+<span class="w">          </span><span class="no">gwa init -T \</span>
+<span class="w">            </span><span class="no">--namespace=$NS \</span>
+<span class="w">            </span><span class="no">--client-id=${{ secrets.TEST_GWA_ACCT_ID }} \</span>
+<span class="w">            </span><span class="no">--client-secret=${{ secrets.TEST_GWA_ACCT_SECRET }}</span>
+
+<span class="w">          </span><span class="no">gwa pg</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="82-helm-chart">8.2. Helm Chart<a class="headerlink" href="#82-helm-chart" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>helm repo add bcgov https://bcgov.github.io/helm-charts
+helm upgrade --install example -f config.yaml -f gwconfig.yaml bcgov/aps-gateway-ns
+</code></pre></div></td></tr></table></div>
+<h2 id="9-share-your-api-for-discovery">9. Share your API for Discovery<a class="headerlink" href="#9-share-your-api-for-discovery" title="Permanent link">&para;</a></h2>
+<p>Package your APIs and make them available for discovery through the API Services Portal and BC Data Catalogue.</p>
+<p>The <code>API Services Portal</code> Directory organizes your APIs by Datasets, Products and Environments. You can manage them via an API or through the UI.</p>
+<p>To use the Directory API, the following scopes are required:</p>
+<ul>
+<li>For <code>contents</code> (documentation), the service account must have the <code>Content.Publish</code> scope</li>
+<li>For <code>datasets</code>, <code>products</code> and <code>environments</code>, the service account must have the <code>Namespace.Manage</code> scope</li>
+<li>For <code>credential issuers</code>, the service account must have the <code>CredentialIssuer.Admin</code> scope</li>
+</ul>
+<p>How to update scopes:</p>
+<ol>
+<li>Click <code>Namespaces</code> in the navigation bar</li>
+<li>Click <code>Namespace Access</code>, and then <code>Service accounts with access</code></li>
+<li>Click the ellipses to the right of the appropriate service account and select <code>Edit Access</code></li>
+</ol>
+<p>View the Directory API:</p>
+<ul>
+<li><strong>V1:</strong> <a href="https://openapi-apps-gov-bc-ca.test.api.gov.bc.ca/?url=https://api-gov-bc-ca.test.api.gov.bc.ca/ds/api/openapi.yaml">V1 Directory API Console</a></li>
+<li><strong>V2:</strong> <a href="https://openapi-apps-gov-bc-ca.test.api.gov.bc.ca/?url=https://api-gov-bc-ca.test.api.gov.bc.ca/ds/api/v2/openapi.yaml">V2 Directory API Console</a></li>
+</ul>
+<h3 id="91-setup-your-draft-dataset">9.1 Setup your Draft Dataset<a class="headerlink" href="#91-setup-your-draft-dataset" title="Permanent link">&para;</a></h3>
+<p>If you do not have a Dataset already defined in the BC Data Catalogue, you can create a draft in the API Services Portal:</p>
+<ol>
+<li>Click <code>Help</code> in the top right, then <code>API Docs</code></li>
+<li>Click the green <code>Authorize</code> button, then enter your Client ID and Secret</li>
+<li>Click the <code>PUT /namespaces/{ns}/datasets</code> accordion item</li>
+<li>Click <code>Try it out</code>, enter your namespace, personalize any fields in the Request body, remove the lines pertaining to organization, and click <code>Execute</code></li>
+<li>Scroll down and ensure a 200 Response was received</li>
+</ol>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DraftDataset</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-draft-dataset</span>
+<span class="nt">organization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ministry-of-citizens-services</span>
+<span class="nt">organizationUnit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">databc</span>
+<span class="nt">notes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some information about this API</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">health</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">standards</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">openapi</span><span class="p p-Indicator">]</span>
+<span class="nt">sector</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">license_title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Access Only</span>
+<span class="nt">view_audience</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Government</span>
+<span class="nt">security_class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LOW-PUBLIC</span>
+<span class="nt">record_publish_date</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2021-05-27&quot;</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>List of available organizations:</p>
+<p><a href="https://api-gov-bc-ca.test.api.gov.bc.ca/ds/api/v2/organizations">https://api-gov-bc-ca.test.api.gov.bc.ca/ds/api/v2/organizations</a></p>
+<p>Use the following to get the <code>organizationUnit</code>:</p>
+<p><a href="https://api-gov-bc-ca.test.api.gov.bc.ca/ds/api/v2/console/#/Organizations/organization-units">https://api-gov-bc-ca.test.api.gov.bc.ca/ds/api/v2/console/#/Organizations/organization-units</a></p>
+</blockquote>
+<h3 id="92-setup-your-product">9.2 Setup your Product<a class="headerlink" href="#92-setup-your-product" title="Permanent link">&para;</a></h3>
+<p>How to add a Product:</p>
+<ol>
+<li>Navigate to Namespaces -&gt; Products</li>
+<li>Click <code>New Product</code> in the top right</li>
+</ol>
+<p>How to associate Product with a Dataset:</p>
+<ol>
+<li>Click the ellipses next to Add Env</li>
+<li>Find your newly created dataset and click Update</li>
+</ol>
+<blockquote>
+<p>There are various patterns for protecting an API that the Kong API Gateway supports. In the following example, the API is protected with Kong's API Key and ACL plugins (<code>kong-api-key-acl</code> flow).</p>
+</blockquote>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Product</span>
+<span class="nt">appId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2B04C28E08AW</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">My API</span>
+<span class="nt">dataset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-draft-dataset</span>
+<span class="nt">environments</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1F7CA929</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">    </span><span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">approval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">legal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terms-of-use-for-api-gateway-1</span>
+<span class="w">    </span><span class="nt">flow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kong-api-key-acl</span>
+<span class="w">    </span><span class="nt">additionalDetailsToRequest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Please provide a bit more of this</span>
+<span class="w">    </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2F7CA929</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">    </span><span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">approval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">legal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terms-of-use-for-api-gateway-1</span>
+<span class="w">    </span><span class="nt">flow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kong-api-key-acl</span>
+<span class="w">    </span><span class="nt">additionalDetailsToRequest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Asking for test environment? Please provide some more info</span>
+<span class="w">    </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">a-service-for-$NS</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3F7CA929</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<span class="w">    </span><span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">approval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">legal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terms-of-use-for-api-gateway-1</span>
+<span class="w">    </span><span class="nt">flow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">client-credentials</span>
+<span class="w">    </span><span class="nt">credentialIssuer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Resource Server $NS</span>
+<span class="w">    </span><span class="nt">additionalDetailsToRequest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Production? Great, please provide X, Y and Z</span>
+<span class="w">    </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="93-update-gateway-configuration">9.3 Update Gateway Configuration<a class="headerlink" href="#93-update-gateway-configuration" title="Permanent link">&para;</a></h3>
+<p>In the previous section the example defined an environment that is protected using Kong's API Key and ACL plugins. To protect the Service, the corresponding plugins need to exist on the Gateway for that service or route. The ACL <code>allow</code> corresponds to the unique <code>Environment ID</code> defined in Section 9.2.</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code>  plugins:
+  - name: key-auth
+    tags: [ ns.$NS ]
+    protocols: [ http, https ]
+    config:
+      key_names: [&quot;X-API-KEY&quot;]
+      run_on_preflight: true
+      hide_credentials: true
+      key_in_body: false
+  - name: acl
+    tags: [ ns.$NS ]
+    config:
+      hide_groups_header: true
+      allow: [ &lt;SEE ENVIRONMENT DETAIL&gt; ]
+</code></pre></div></td></tr></table></div>
+<p>How to Update Gateway Configuration:</p>
+<ol>
+<li>In Namespaces -&gt; Products, click edit next to product environment</li>
+<li>For Authorization, choose Kong API Key with ACL Flow. Assign Terms of Use if desired.</li>
+<li>Check Require Approval</li>
+<li>Click View Plugin Template, and add the plugin configuration to the service <code>a-service-for-$NS</code> in the <code>gwconfig.yaml</code> file you created in Section 3.</li>
+<li>Re-run the publish command: <code>./gwa pg gwconfig.yaml</code>. This will protect the upstream service with an API Key.</li>
+<li>Back in the portal, click Continue</li>
+<li>Drag and drop the available service to Active Services</li>
+<li>Click Save</li>
+</ol>
+<h3 id="94-check-access">9.4 Check Access<a class="headerlink" href="#94-check-access" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>curl https://${NAME}-api-gov-bc-ca.test.api.gov.bc.ca/headers
+</code></pre></div></td></tr></table></div>
+<p>You can also get the URL by going to Namespaces -&gt; Gateway Services and clicking the drop down arrow on the right.</p>
+<p>You will get an error: <code>No API key found in request</code>.</p>
+<h3 id="95-get-an-api-key">9.5 Get an API Key<a class="headerlink" href="#95-get-an-api-key" title="Permanent link">&para;</a></h3>
+<p>Go to the <code>Namespaces</code> tab in the <code>API Services Portal</code>. Click the <code>Preview in Directory</code> link in the <code>Products</code> panel.</p>
+<p>You will see a card with the title of the Dataset that you created in Section 9.1.</p>
+<p>Click the title, then click <code>Request Access</code>.</p>
+<p>Choose or create an <code>Application</code>, select the <code>Dev</code> environment, and click <code>Request Access &amp; Continue</code>.</p>
+<p>Clicking <code>Generate Secrets</code> will generate your API Key. Make a note of the API Key and Client ID.</p>
+<p>If Require Approval was selected in section 9.3, navigate to Namespaces -&gt; Consumers and accept the request.</p>
+<blockquote>
+<p>NOTE: An Environment can be configured for auto-approval. For the sample, <code>Dev</code> auto-approval is enabled so the Access Manager does not need to approve the request before getting access.</p>
+</blockquote>
+<p>When you run the command:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>curl https://${NAME}-api-gov-bc-ca.test.api.gov.bc.ca/headers -H &quot;X-API-KEY: $KEY&quot;
+</code></pre></div></td></tr></table></div>
+<p>It should return header information similar to the following:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>{
+  &quot;headers&quot;: {
+    &quot;Accept&quot;: &quot;*/*&quot;,
+    &quot;User-Agent&quot;: &quot;curl/7.64.1&quot;,
+    &quot;X-Consumer-Custom-Id&quot;: &quot;8ED11248-072EBB2791974533&quot;,
+    &quot;X-Consumer-Id&quot;: &quot;db3a0658-c049-430e-b143-ce46685d8e20&quot;,
+    &quot;X-Consumer-Username&quot;: &quot;8ED11248-072EBB2791974533&quot;,
+    &quot;X-Credential-Identifier&quot;: &quot;a91bb07c-41a9-49b6-9481-155e9fd68dba&quot;
+  }
+}
+</code></pre></div></td></tr></table></div>
+<h3 id="96-manage-access">9.6 Manage Access<a class="headerlink" href="#96-manage-access" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>NOTE: To manage access to your APIs, you must have the <code>Access.Manage</code> permission for the Namespace.</p>
+</blockquote>
+<p>As an Access Manager, you can manage the new Consumer by going to the <code>Namespaces</code> tab, and selecting <code>Consumers</code>.</p>
+<p>Here you should see the newly created Consumer. Click on the <code>name</code>.</p>
+<p>You can administer Controls such as rate limiting and IP restrictions.</p>
+<p>You can administer Authorization by toggling access to the particular Product and Environment.</p>
+<h3 id="97-enabling-for-discovery">9.7 Enabling for Discovery<a class="headerlink" href="#97-enabling-for-discovery" title="Permanent link">&para;</a></h3>
+<p>Once the content is complete and you have applied the appropriate controls to your API, you are ready to make it available on the API Directory.</p>
+<p><strong>Prerequisite:</strong> Your namespace must be approved for use by a Ministry Organization Administrator. This is a one-time process to link the Ministry to the Namespace and can be requested here: <a href="https://dpdd.atlassian.net/servicedesk/customer/portal/1/group/2/create/118">https://dpdd.atlassian.net/servicedesk/customer/portal/1/group/2/create/118</a></p>
+<p>Once approved, you must make an Environment <code>active</code> for the corresponding Product Environment to appear in the API Directory. You can do this by either updating the Product Environment configuration above to <code>active: true</code>, or going to the API Services Portal UI and editing the Environment details.</p>
+<h3 id="98-view-your-product-in-the-api-directory">9.8 View Your Product in the API Directory<a class="headerlink" href="#98-view-your-product-in-the-api-directory" title="Permanent link">&para;</a></h3>
+<p>Find your API in the <a href="https://api-gov-bc-ca.test.api.gov.bc.ca/devportal/api-directory">API Services Portal Directory</a>.</p>
+<p>It is now ready to receive access requests from the community!</p>
+<h2 id="10-what-to-try-next">10 What to try next?<a class="headerlink" href="#10-what-to-try-next" title="Permanent link">&para;</a></h2>
+<h3 id="101-connect-with-the-bc-government-api-community">10.1 Connect with the BC Government API Community<a class="headerlink" href="#101-connect-with-the-bc-government-api-community" title="Permanent link">&para;</a></h3>
+<p>Post a message on <a href="https://chat.developer.gov.bc.ca/channel/aps-ops">Rocket.Chat #aps-ops</a>.</p>
+<h3 id="102-read-our-other-guides">10.2 Read Our Other Guides<a class="headerlink" href="#102-read-our-other-guides" title="Permanent link">&para;</a></h3>
+<p>Find information about authentication and authorization patterns, reference implementations, plugin usage and much more.</p>
+<h3 id="103-protect-your-api-using-an-external-identity-provider">10.3 Protect Your API using an External Identity Provider<a class="headerlink" href="#103-protect-your-api-using-an-external-identity-provider" title="Permanent link">&para;</a></h3>
+<p>Use the <code>client-credentials</code> flow to protect your API (see <a href="tutorial-idp-client-cred-flow/">Client Credential Protection</a>).</p>
+<h3 id="104-use-the-access-approval-process">10.4 Use the Access Approval Process<a class="headerlink" href="#104-use-the-access-approval-process" title="Permanent link">&para;</a></h3>
+<p>Enable <code>approval</code> for an Environment and go through the access request process by requesting access, and playing the role of Access Manager to review the request and approve access.</p>
+<h3 id="105-publish-your-documentation-on-the-portal">10.5 Publish Your Documentation on the Portal<a class="headerlink" href="#105-publish-your-documentation-on-the-portal" title="Permanent link">&para;</a></h3>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Content</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Getting Started with Example API</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Getting Started with Example API</span>
+<span class="nt">externalLink</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/bcgov/$NS/getting_started.md</span>
+<span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;all</span><span class="nv"> </span><span class="s">markdown</span><span class="nv"> </span><span class="s">content&quot;</span>
+<span class="nt">order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ns.$NS</span><span class="p p-Indicator">]</span>
+<span class="nt">isComplete</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">isPublic</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">publishDate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2021-06-02T08:00:00.000-08:00&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="production-links">Production Links<a class="headerlink" href="#production-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://api.gov.bc.ca">API Services Portal</a></li>
+<li><a href="https://openapi.apps.gov.bc.ca?url=https://gwa.api.gov.bc.ca/docs/v2/openapi.yaml">gwa-api Swagger Console</a></li>
+<li><a href="https://openapi-to-postman.api.gov.bc.ca/?u=https://gwa.api.gov.bc.ca/docs/v2/openapi.yaml">gwa-api Postman Collection</a></li>
+<li><a href="https://grafana.apps.gov.bc.ca">Gateway Metrics - Grafana</a></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../keycloak-rbac/" class="md-footer__link md-footer__link--prev" aria-label="Previous: OIDC and RBAC Protection" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+                OIDC and RBAC Protection
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../prom-query/" class="md-footer__link md-footer__link--next" aria-label="Next: Query Kong Metrics Using Service Account" rel="next">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+                Query Kong Metrics Using Service Account
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "content.action.edit"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
